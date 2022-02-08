@@ -100,7 +100,7 @@ namespace RepositoryLayer.Class
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
-        public bool forgotpassword(string email)
+        public bool Forgotpassword(string email)
         {
             try
             {

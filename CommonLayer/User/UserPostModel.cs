@@ -17,11 +17,11 @@ namespace CommonLayer.User
         public string email { get; set; }
 
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$",
-         ErrorMessage = "Please enter Strong Password")]
+         ErrorMessage = "Weak Password")]
         public string password { get; set; }
 
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$",
-        ErrorMessage = "Please enter Strong Password")]
+        ErrorMessage = "Weak Password")]
         public string Cpassword { get; set; }
     }
 }

@@ -47,11 +47,11 @@ namespace BusinessLayer.Class
                 throw e;
             }
         }
-        public bool forgotpassword(string email)
+        public bool Forgotpassword(string email)
         {
             try
             {
-                return userRL.forgotpassword(email);
+                return userRL.Forgotpassword(email);
             }
             catch(Exception e)
             {

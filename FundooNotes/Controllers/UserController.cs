@@ -80,11 +80,11 @@ namespace FundooNotes.Controllers
             }
         }
         [HttpGet]
-        public ActionResult forgotpassword(string email)
+        public ActionResult Forgotpassword(string email)
         {
             try
             {
-                this.userBL.forgotpassword(email);
+                this.userBL.Forgotpassword(email);
                 return this.Ok(new { success = true, message = $"The link has been sent to {email}, please check your email to reset your password..." });
             }
             catch (Exception e)
