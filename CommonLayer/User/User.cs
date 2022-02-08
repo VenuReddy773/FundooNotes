@@ -18,7 +18,6 @@ namespace CommonLayer.User
         public string lastName { get; set; }
         public string phoneNo { get; set; }
         public string address { get; set; }
-        [Required]
         public string email { get; set; }
         [Required]
         public string password { get; set; }
@@ -28,6 +27,5 @@ namespace CommonLayer.User
         public DateTime registeredDate { get; set; }
         [Required]
         public DateTime modifiedDate  { get; set; }
-
     }
 }

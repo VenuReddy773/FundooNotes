@@ -7,7 +7,7 @@ using System.Text;
 
 namespace BusinessLayer.Class
 {
-    public class UserBL:IUserBL
+    public class UserBL : IUserBL  
     {
         IUserRL userRL;
         public UserBL(IUserRL userRL)
@@ -19,6 +19,50 @@ namespace BusinessLayer.Class
             try
             {
                 userRL.RegisterUser(userPostModel);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public string login(UserLogin userLogin )
+        {
+            try
+            {
+                 return userRL.login(userLogin);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public void ResetPassword(string email, string password,string Cpassword)
+        {
+            try
+            {
+                userRL.ResetPassword(email,password,Cpassword);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public bool forgotpassword(string email)
+        {
+            try
+            {
+                return userRL.forgotpassword(email);
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
+        public List<User> GetAllUsers()
+        {
+            try
+            {
+                return userRL.GetAllUsers();
             }
             catch (Exception e)
             {

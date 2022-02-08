@@ -8,5 +8,9 @@ namespace RepositoryLayer.Interface
     public interface IUserRL
     {
         void RegisterUser(UserPostModel userPostModel);
+        string login(UserLogin userLogin);
+        bool forgotpassword(string email);
+        void ResetPassword(string email, string password, string Cpassword );
+        List<User> GetAllUsers();
     }
 }
