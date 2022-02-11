@@ -3,6 +3,7 @@ using CommonLayer.User;
 using Experimental.System.Messaging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using RepositoryLayer.Services;
@@ -56,7 +57,7 @@ namespace FundooNotes.Controllers
         }
         [AllowAnonymous]
         [HttpPut]
-        public ActionResult ResetPassword(string email,string password,string Cpassword)
+        public ActionResult ResetPassword(string password,string Cpassword)
         {
             try
             {
@@ -69,10 +70,17 @@ namespace FundooNotes.Controllers
                 {
                     IEnumerable<Claim> claims = Identity.Claims;
                     var UserEmailObject = claims.Where(p => p.Type == @"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress").FirstOrDefault()?.Value;
-                    this.userBL.ResetPassword(UserEmailObject,password,Cpassword);
-                    return Ok(new { success = true, message = "Password Changed Sucessfully" });
+                    if (UserEmailObject != null)
+                    {
+                        this.userBL.ResetPassword(UserEmailObject, password, Cpassword);
+                        return Ok(new { success = true, message = "Password Changed Sucessfully" });
+                    }
+                    else
+                    {
+                        return this.BadRequest(new { success = false, message = "Email Not Authorized" });
+                    }
                 }
-                return Ok(new { success = false, message = "Password not Changed" });
+                return this.BadRequest(new { success = false, message = "Password not Changed" });
             }
             catch (Exception e)
             {
@@ -84,6 +92,11 @@ namespace FundooNotes.Controllers
         {
             try
             {
+                var result = fundooDBContext.Users.FirstOrDefault(e => e.email == email);
+                if(result == null)
+                {
+                    return this.BadRequest(new { success = false, message = $"Please Enter Valid Email Address.." });
+                }
                 this.userBL.Forgotpassword(email);
                 return this.Ok(new { success = true, message = $"The link has been sent to {email}, please check your email to reset your password..." });
             }
